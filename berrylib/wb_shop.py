@@ -7,9 +7,13 @@ class WbShop:
     """
     That class represents your shop that you have on Wildberries
     """
-    def __init__(self, api_key, name = 'Shop') -> None:
+    def __init__(self, api_key = '0', name = 'Shop', test = False) -> None:
         self.api = api_key
         self.name = name
+        if test == True:
+            self.test_add = '-sandbox'
+        else:
+            self.test_add = ''
 
     def __str__(self):
          return f"{self.name}"
@@ -60,7 +64,7 @@ class WbShop:
             date_from, date_to = self.get_last_week()
         
         if data_type == "df_grouped":
-            df_report = self.get_request(url = 'https://statistics-api.wildberries.ru/api/v1/supplier/reportDetailByPeriod',
+            df_report = self.get_request(url = f'https://statistics-api{self.test_add}.wildberries.ru/api/v1/supplier/reportDetailByPeriod',
                                     js_params={"dateFrom":date_from, "dateTo":date_to, 'rrdid':0},
                                     d_type = 'df')
             return df_report.groupby(by=["sa_name",'nm_id',"doc_type_name","supplier_oper_name",])\
@@ -71,6 +75,6 @@ class WbShop:
                                                     .sum(numeric_only=True)
             
         else:
-            return self.get_request(url = 'https://statistics-api.wildberries.ru/api/v1/supplier/reportDetailByPeriod',
+            return self.get_request(url = f'https://statistics-api{self.test_add}.wildberries.ru/api/v1/supplier/reportDetailByPeriod',
                                     js_params={"dateFrom":date_from, "dateTo":date_to, 'rrdid':0},
                                     d_type = data_type)
