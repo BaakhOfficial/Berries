@@ -18,7 +18,8 @@ class WbShop:
     def __str__(self):
          return f"{self.name}"
     
-    def get_last_week(self):
+    @staticmethod
+    def get_last_week():
         """
         Returns 2 values of the last week. Monday and Sunday
         """
