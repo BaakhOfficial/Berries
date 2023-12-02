@@ -32,25 +32,27 @@ class WbShop:
         """
         Allows you to make a manual request. Returns requests.models.Response in origin format
         """
-        # !!!!!!!!!!!!!!!!!!!!! Write support for mistakes and different codes !!!!!!!!!!!!!!!!!!! 
-        # 
+
         # Authorization parameters
         headers = {
             'Authorization': self.api}
-        # request
+        # Request
         response = requests.get(url,
                                 headers=headers,
                                 params=js_params)
         # Choosing type of exported data
-        if d_type == 'json':
-            jdata = json.loads(response.text)
-            return jdata
-        elif d_type == 'text':
-            return response.text
-        elif d_type == 'origin':
-            return response
-        elif d_type == 'df':
-             return pd.DataFrame(json.loads(response.text))
+        if response.ok:
+            if d_type == 'json':
+                jdata = json.loads(response.text)
+                return jdata
+            elif d_type == 'text':
+                return response.text
+            elif d_type == 'origin':
+                return response
+            elif d_type == 'df':
+                return pd.DataFrame(json.loads(response.text))
+        else:
+            return None
              
 
     def rsr(self, date_from = datetime.date(1997,8,10), date_to = datetime.date(1997,8,10), data_type = 'json'):

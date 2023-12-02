@@ -13,6 +13,9 @@ class TestWbShop(unittest.TestCase):
         self.assertEqual(datetime.datetime.weekday(self.test_shop.get_last_week()[1]),6)
         self.assertEqual(type(self.test_shop.get_last_week()[0]), datetime.date)
         self.assertEqual(type(self.test_shop.get_last_week()[1]), datetime.date)
+    
+    def test_rsr(self):
+        self.assertIsNone(self.test_shop.rsr())
 
 if __name__ == "__main__":
     unittest.main()
