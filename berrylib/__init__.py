@@ -1,1 +1,0 @@
-from .wb_shop import WbShop
