@@ -4,7 +4,7 @@ import json
 import pandas as pd
 
 class WbShop:
-    """
+    """pip
     That class represents your shop that you have on Wildberries
     """
     def __init__(self, api_key = '0', name = 'Shop', test = False) -> None:

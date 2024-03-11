@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import patch
-from berrylib.wb_shop import WbShop
+from ..berrylib import wb_shop
 import datetime
 
 class TestWbShop(unittest.TestCase):
 
-    test_shop = WbShop(test=True)
+    test_shop = wb_shop.WbShop(test=True)
 
     def test_get_last_week(self):
         self.assertIsNotNone(self.test_shop.get_last_week()[0])
